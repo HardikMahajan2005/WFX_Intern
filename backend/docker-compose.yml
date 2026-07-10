@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  # Single container running both Express Backend and Typesense Search Engine
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: wfx-backend
+    restart: always
+    ports:
+      - "4000:4000"                    # Express API port
+      - "8108:8108"                    # Typesense port (exposed for local client indexing)
+    env_file:
+      - .env
+    environment:
+      - PORT=4000
+      - TYPESENSE_HOST=127.0.0.1       # Connect internally inside the same container
+      - TYPESENSE_PORT=8108
+      - TYPESENSE_PROTOCOL=http
+      - TYPESENSE_API_KEY=xyz123
+    volumes:
+      - typesense-data:/app/typesense-data
+
+volumes:
+  typesense-data:                      # Persist search indexes locally
