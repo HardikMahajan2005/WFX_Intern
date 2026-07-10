@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# Local Environment Variables
+.env
+.env.local
+
+# Typesense Local Binary & Data (Downloaded during local setup)
+typesense-server
+typesense-server-*.tar.gz
+typesense-data/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+logs/
+*.log
+
+# OS Metadata
+.DS_Store
+Thumbs.db
