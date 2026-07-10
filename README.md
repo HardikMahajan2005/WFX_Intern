@@ -52,26 +52,29 @@ The system manages 6 core business entities: Suppliers, Buyers, Finished Goods, 
 - All queries logged to `query_logs` table for audit trail
 - SQL injection protection: only `SELECT` statements allowed
 
-### 🖼️ Image Search
-- Upload any garment image (drag-and-drop or click)
-- **Gemini Vision** extracts attributes: color, fabric, pattern, category, gender, style
-- Attributes are passed to **Typesense** for semantic product matching
-- Returns top 10 similar products from the catalog
+### 🖼️ Combined AI & Visual Search
+- **Natural Language Text Search**: Query the catalog with plain English prompts (like *"Blue floral dress"* or *"Black oversized hoodie"*). Includes handy quick-click recommendations in the sidebar to test prompts instantly.
+- **Optional Image Search**: Drag & drop or upload a photo of a garment. **Gemini Vision** analyzes the image to extract details (color, fabric, category, pattern), which are then matched using **Typesense** to locate visually similar garments.
+- Integrated search states allow you to clear text search and image uploads with a single click.
 
 ### 🔍 Full-Text Product Search
-- Instant search across style name, fabric, color, print, category, brand
-- Powered by **Typesense** (blazing fast, typo-tolerant)
-- Filter results by category, fabric, color
+- Fast, typo-tolerant search across style name, fabric, color, print, category, and brand.
+- Powered by **Typesense** under the hood.
+- Multi-dimensional sidebar filters to narrow down category, fabric, and color combinations.
 
 ### 📊 Dashboard
-- Live KPI cards: Total Products, Suppliers, Buyers, Orders, Revenue
-- Revenue trend chart (last 24 months) from paid invoices
-- Built with Recharts
+- Live KPI cards displaying aggregate business metrics: Total Revenue, Finished Goods count, Sales Orders, and active Buyers.
+- Interactive, responsive revenue trend chart plotting the last 24 months (built using Recharts).
 
-### 📦 Finished Goods Catalog
-- Browse 1,000+ products with rich filtering (category, fabric, color, season, brand)
-- Pagination support
-- Product cards with image, cost, selling price, supplier info
+### 📦 Finished Goods Catalog & Usability Enhancements
+- Browse over 1,000 products with advanced filter matrices.
+- **Auto-Scroll Pagination**: Navigating through pages automatically scrolls the main page view back to the top, saving you from manual scrolling.
+- Click any product to open a detailed modal containing tech pack specifications and supplier parameters.
+
+### 💎 Design System & Brand Identity
+- **Redesigned Brand Header**: Built a premium, glassmorphic logo container featuring an interactive `Compass` icon that spins `360deg` on hover, a sharp neon gradient border (using CSS masking), and a glowing ambient backlight.
+- **Consistent Typography**: Swapped the serif header font for a modern, tracking-heavy geometric sans-serif style for sidebar navigation labels and status badges.
+
 
 ### 🗂️ Full CRUD REST API
 - **Suppliers** — list, filter by country, get by ID
