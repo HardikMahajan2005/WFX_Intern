@@ -6,7 +6,6 @@ import {
   Sparkles,
   Trash2,
   RefreshCw,
-  Compass,
   PackageX,
   Search,
 } from "lucide-react";
@@ -312,7 +311,6 @@ export default function ImageSearch() {
                 onClick={() => {
                   setTextQuery(example);
                   // Trigger search immediately
-                  const fakeEvent = { preventDefault: () => {} };
                   // We need to set state and call search, but since state updates are batching, we call it directly
                   setLoading(true);
                   setError(null);

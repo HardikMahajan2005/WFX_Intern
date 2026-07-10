@@ -6,8 +6,7 @@ import {
   ShoppingCart,
   DollarSign,
   AlertCircle,
-  RefreshCw,
-  ArrowUpRight
+  RefreshCw
 } from "lucide-react";
 import {
   AreaChart,
@@ -45,7 +44,9 @@ export default function Dashboard() {
   };
 
   useEffect(() => {
-    fetchDashboardData();
+    Promise.resolve().then(() => {
+      fetchDashboardData();
+    });
   }, []);
 
   const formatCurrency = (val) => {
