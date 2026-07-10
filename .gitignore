@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Environment Variables
+.env
+.env.local
+**/.env
+**/.env.local
+
+# Build output
+dist/
+build/
+**/dist/
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Typesense
+typesense-server
+typesense-server-*.tar.gz
+typesense-data/
+
+# Temp
+*.temp
+backend/database/all_migrations.sql
