@@ -1,0 +1,30 @@
+{
+  "name": "wfx-backend",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "migrate": "node database/migrate.js",
+    "seed": "node database/seed.js",
+    "index-search": "node scripts/indexFinishedGoods.js",
+    "index-images": "node scripts/generateImageEmbeddings.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "WFX AI-Native ERP — Express backend + database tooling",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.0",
+    "cors": "^2.8.5",
+    "csv-parse": "^5.5.6",
+    "dotenv": "^16.4.5",
+    "express": "^5.2.1",
+    "multer": "^1.4.5-lts.1",
+    "pg": "^8.22.0",
+    "typesense": "^3.0.6",
+    "ws": "^8.18.0",
+    "zod": "^3.23.8"
+  }
+}
