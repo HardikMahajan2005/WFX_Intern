@@ -157,7 +157,7 @@ export default function FinishedGoods() {
       {/* Page header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-5">
         <div className="space-y-3">
-          <span className="text-eyebrow">Catalog / 04</span>
+          <span className="text-eyebrow">Catalog</span>
           <h2 className="text-4xl md:text-5xl font-display font-semibold text-stone-100 tracking-tight">
             Finished <span className="italic text-amber-400">goods.</span>
           </h2>

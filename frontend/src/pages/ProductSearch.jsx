@@ -135,7 +135,7 @@ export default function ProductSearch() {
       {/* Page header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-5">
         <div className="space-y-3">
-          <span className="text-eyebrow">Discovery / 03</span>
+          <span className="text-eyebrow">Discovery</span>
           <h2 className="text-4xl md:text-5xl font-display font-semibold text-stone-100 tracking-tight">
             Search the <span className="italic text-amber-400">catalog.</span>
           </h2>
@@ -415,11 +415,21 @@ function FilterSelect({ label, value, onChange, options, placeholder }) {
    Shared pagination
    ============================================================ */
 export function Pagination({ page, totalPages, setPage }) {
+  const handlePageChange = (newPage) => {
+    setPage(newPage);
+    const main = document.querySelector("main");
+    if (main) {
+      main.scrollTo({ top: 0, behavior: "instant" });
+    } else {
+      window.scrollTo({ top: 0, behavior: "instant" });
+    }
+  };
+
   return (
     <div className="flex items-center justify-center gap-3 pt-2">
       <button
         disabled={page <= 1}
-        onClick={() => setPage(page - 1)}
+        onClick={() => handlePageChange(page - 1)}
         className="btn-ghost"
       >
         Previous
@@ -431,7 +441,7 @@ export function Pagination({ page, totalPages, setPage }) {
       </span>
       <button
         disabled={page >= totalPages}
-        onClick={() => setPage(page + 1)}
+        onClick={() => handlePageChange(page + 1)}
         className="btn-ghost"
       >
         Next

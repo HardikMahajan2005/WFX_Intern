@@ -45,11 +45,11 @@
   }
 
   body {
-    background-color: #0a0e1a;
+    background-color: #060814;
     background-image:
-      radial-gradient(at 8% 0%, rgba(245, 184, 0, 0.08) 0px, transparent 45%),
-      radial-gradient(at 100% 100%, rgba(99, 102, 241, 0.07) 0px, transparent 50%),
-      radial-gradient(at 50% 50%, rgba(245, 184, 0, 0.02) 0px, transparent 70%);
+      radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, rgba(236, 72, 153, 0.12) 0px, transparent 50%),
+      radial-gradient(at 50% 100%, rgba(245, 184, 0, 0.08) 0px, transparent 50%);
     background-attachment: fixed;
     color: #f5f5f4;
     font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -471,3 +471,410 @@
   font-weight: 600 !important;
   font-size: 16px !important;
 }
+
+/* ============================================================
+   WFX Explorer — Custom Accent Navigation Themes
+   ============================================================ */
+.nav-item-active {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.25);
+}
+
+/* Active navigation indicators */
+.nav-left-indicator {
+  transition: all 0.3s ease;
+}
+
+/* Active navigation state accents */
+.active-indigo {
+  background: rgba(99, 102, 241, 0.08) !important;
+  color: #a5b4fc !important;
+}
+.active-indigo .nav-left-indicator {
+  background-color: #6366f1 !important;
+  box-shadow: 0 0 12px rgba(99, 102, 241, 0.8) !important;
+}
+.active-indigo .nav-icon {
+  color: #818cf8 !important;
+}
+
+.active-pink {
+  background: rgba(236, 72, 153, 0.08) !important;
+  color: #f9a8d4 !important;
+}
+.active-pink .nav-left-indicator {
+  background-color: #ec4899 !important;
+  box-shadow: 0 0 12px rgba(236, 72, 153, 0.8) !important;
+}
+.active-pink .nav-icon {
+  color: #f472b6 !important;
+}
+
+.active-blue {
+  background: rgba(59, 130, 246, 0.08) !important;
+  color: #93c5fd !important;
+}
+.active-blue .nav-left-indicator {
+  background-color: #3b82f6 !important;
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.8) !important;
+}
+.active-blue .nav-icon {
+  color: #60a5fa !important;
+}
+
+.active-emerald {
+  background: rgba(16, 185, 129, 0.08) !important;
+  color: #6ee7b7 !important;
+}
+.active-emerald .nav-left-indicator {
+  background-color: #10b981 !important;
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.8) !important;
+}
+.active-emerald .nav-icon {
+  color: #34d399 !important;
+}
+
+.active-amber {
+  background: rgba(245, 184, 0, 0.08) !important;
+  color: #fde047 !important;
+}
+.active-amber .nav-left-indicator {
+  background-color: #f5b800 !important;
+  box-shadow: 0 0 12px rgba(245, 184, 0, 0.8) !important;
+}
+.active-amber .nav-icon {
+  color: #facc15 !important;
+}
+
+/* Light mode overrides for active navigation states */
+html.light .active-indigo {
+  background: rgba(99, 102, 241, 0.06) !important;
+  color: #4f46e5 !important;
+}
+html.light .active-pink {
+  background: rgba(236, 72, 153, 0.06) !important;
+  color: #db2777 !important;
+}
+html.light .active-blue {
+  background: rgba(59, 130, 246, 0.06) !important;
+  color: #2563eb !important;
+}
+html.light .active-emerald {
+  background: rgba(16, 185, 129, 0.06) !important;
+  color: #059669 !important;
+}
+html.light .active-amber {
+  background: rgba(245, 184, 0, 0.06) !important;
+  color: #ca8a04 !important;
+}
+
+/* ============================================================
+   WFX Explorer — Custom Accent Card Hover Glows
+   ============================================================ */
+.glow-card {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+.glow-card:hover {
+  transform: translateY(-4px);
+}
+
+/* 1. Total Revenue Card (Amber) */
+.grid-cols-1 > div:nth-child(1).glow-card:hover {
+  border-color: rgba(245, 184, 0, 0.25) !important;
+  box-shadow: 
+    0 15px 35px -10px rgba(245, 184, 0, 0.1),
+    0 0 25px -5px rgba(245, 184, 0, 0.15) !important;
+}
+
+/* 2. Finished Goods Card (Blue) */
+.grid-cols-1 > div:nth-child(2).glow-card:hover {
+  border-color: rgba(59, 130, 246, 0.25) !important;
+  box-shadow: 
+    0 15px 35px -10px rgba(59, 130, 246, 0.1),
+    0 0 25px -5px rgba(59, 130, 246, 0.15) !important;
+}
+
+/* 3. Sales Orders Card (Emerald) */
+.grid-cols-1 > div:nth-child(3).glow-card:hover {
+  border-color: rgba(16, 185, 129, 0.25) !important;
+  box-shadow: 
+    0 15px 35px -10px rgba(16, 185, 129, 0.1),
+    0 0 25px -5px rgba(16, 185, 129, 0.15) !important;
+}
+
+/* 4. Suppliers Card (Rose) */
+.grid-cols-1 > div:nth-child(4).glow-card:hover {
+  border-color: rgba(244, 63, 94, 0.25) !important;
+  box-shadow: 
+    0 15px 35px -10px rgba(244, 63, 94, 0.1),
+    0 0 25px -5px rgba(244, 63, 94, 0.15) !important;
+}
+
+/* 5. Buyers Card (Violet) */
+.grid-cols-1 > div:nth-child(5).glow-card:hover {
+  border-color: rgba(139, 92, 246, 0.25) !important;
+  box-shadow: 
+    0 15px 35px -10px rgba(139, 92, 246, 0.1),
+    0 0 25px -5px rgba(139, 92, 246, 0.15) !important;
+}
+
+/* Light Mode Card specific glows override */
+html.light .glow-card:hover {
+  border-color: rgba(0, 0, 0, 0.1) !important;
+}
+html.light .grid-cols-1 > div:nth-child(1).glow-card:hover {
+  box-shadow: 0 15px 30px rgba(245, 184, 0, 0.08) !important;
+}
+html.light .grid-cols-1 > div:nth-child(2).glow-card:hover {
+  box-shadow: 0 15px 30px rgba(59, 130, 246, 0.08) !important;
+}
+html.light .grid-cols-1 > div:nth-child(3).glow-card:hover {
+  box-shadow: 0 15px 30px rgba(16, 185, 129, 0.08) !important;
+}
+html.light .grid-cols-1 > div:nth-child(4).glow-card:hover {
+  box-shadow: 0 15px 30px rgba(244, 63, 94, 0.08) !important;
+}
+html.light .grid-cols-1 > div:nth-child(5).glow-card:hover {
+  box-shadow: 0 15px 30px rgba(139, 92, 246, 0.08) !important;
+}
+
+/* ============================================================
+   WFX Explorer — Light Mode Theme Overrides
+   ============================================================ */
+html.light {
+  color-scheme: light;
+  
+  --color-bg-base: #f9fafb;
+  --color-bg-elevated: #ffffff;
+  --color-bg-subtle: #f3f4f6;
+  --color-bg-input: #ffffff;
+
+  --color-border: rgba(0, 0, 0, 0.08);
+  --color-border-strong: rgba(0, 0, 0, 0.16);
+
+  --color-text-primary: #111827;
+  --color-text-secondary: #4b5563;
+  --color-text-muted: #9ca3af;
+}
+
+html.light body {
+  background-color: #f3f4f6;
+  background-image:
+    radial-gradient(at 8% 0%, rgba(245, 184, 0, 0.04) 0px, transparent 45%),
+    radial-gradient(at 100% 100%, rgba(99, 102, 241, 0.03) 0px, transparent 50%),
+    radial-gradient(at 50% 50%, rgba(245, 184, 0, 0.01) 0px, transparent 70%);
+  color: #1f2937;
+}
+
+html.light h1,
+html.light h2,
+html.light h3,
+html.light h4,
+html.light h5,
+html.light h6 {
+  color: #111827 !important;
+}
+
+/* Glass Panels */
+html.light .glass-panel {
+  background: rgba(255, 255, 255, 0.7) !important;
+  border-color: rgba(0, 0, 0, 0.06) !important;
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05) !important;
+}
+
+html.light .glass-panel-elev {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.8) inset,
+    0 30px 60px -20px rgba(0, 0, 0, 0.08) !important;
+}
+
+html.light .glass-panel-strong {
+  background: rgba(255, 255, 255, 0.98) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04) !important;
+}
+
+html.light .inner-panel {
+  background: rgba(0, 0, 0, 0.03) !important;
+  border-color: rgba(0, 0, 0, 0.04) !important;
+}
+
+/* Utility overrides for hex code backgrounds and borders */
+html.light .bg-\[\#0a0e1a\]\/95 { background-color: rgba(255, 255, 255, 0.95) !important; }
+html.light .bg-\[\#0a0e1a\]\/80 { background-color: rgba(255, 255, 255, 0.8) !important; }
+html.light .bg-\[\#0a0e1a\]\/60 { background-color: rgba(255, 255, 255, 0.6) !important; }
+html.light .bg-\[\#0a0e1a\]\/50 { background-color: #f9fafb !important; }
+html.light .bg-\[\#0a0e1a\]\/40 { background-color: rgba(255, 255, 255, 0.4) !important; }
+html.light .bg-\[\#0a0e1a\] { background-color: #f9fafb !important; }
+html.light .bg-\[\#0d1424\] { background-color: #ffffff !important; }
+
+/* Text color overrides */
+html.light .text-stone-100 { color: #111827 !important; }
+html.light .text-stone-200 { color: #1f2937 !important; }
+html.light .text-stone-300 { color: #374151 !important; }
+html.light .text-stone-400 { color: #4b5563 !important; }
+html.light .text-stone-500 { color: #6b7280 !important; }
+html.light .text-stone-600 { color: #9ca3af !important; }
+
+/* Border color overrides */
+html.light .border-white\/5 { border-color: rgba(0, 0, 0, 0.06) !important; }
+html.light .border-white\/8 { border-color: rgba(0, 0, 0, 0.08) !important; }
+html.light .border-white\/10 { border-color: rgba(0, 0, 0, 0.1) !important; }
+html.light .border-white\/20 { border-color: rgba(0, 0, 0, 0.15) !important; }
+
+/* White opacity backgrounds */
+html.light .bg-white\/\[0\.03\] { background-color: rgba(0, 0, 0, 0.03) !important; }
+html.light .bg-white\/\[0\.04\] { background-color: rgba(0, 0, 0, 0.04) !important; }
+html.light .bg-white\/5 { background-color: rgba(0, 0, 0, 0.04) !important; }
+html.light .bg-white\/10 { background-color: rgba(0, 0, 0, 0.06) !important; }
+html.light .bg-stone-700\/50 { background-color: #e5e7eb !important; }
+
+/* Hover overrides */
+html.light .hover\:bg-white\/5:hover { background-color: rgba(0, 0, 0, 0.04) !important; }
+html.light .hover\:bg-white\/\[0\.03\]:hover { background-color: rgba(0, 0, 0, 0.03) !important; }
+html.light .group:hover .group-hover\:text-stone-300 { color: #1f2937 !important; }
+
+/* Ghost buttons in light mode */
+html.light .btn-ghost {
+  border-color: rgba(0, 0, 0, 0.1) !important;
+  color: #4b5563 !important;
+}
+html.light .btn-ghost:hover {
+  background: rgba(0, 0, 0, 0.04) !important;
+  border-color: rgba(0, 0, 0, 0.2) !important;
+  color: #111827 !important;
+}
+
+/* Form Elements */
+html.light .input-base,
+html.light .select-base {
+  background-color: #ffffff !important;
+  border-color: rgba(0, 0, 0, 0.15) !important;
+  color: #111827 !important;
+}
+html.light .input-base::placeholder {
+  color: #9ca3af !important;
+}
+html.light .select-base option {
+  background: #ffffff !important;
+  color: #111827 !important;
+}
+html.light .input-range {
+  background: rgba(0, 0, 0, 0.08) !important;
+}
+html.light .input-range::-webkit-slider-thumb {
+  border-color: #ffffff !important;
+}
+html.light .input-range::-moz-range-thumb {
+  border-color: #ffffff !important;
+}
+
+/* Chip neutral */
+html.light .chip-neutral {
+  background: rgba(0, 0, 0, 0.03) !important;
+  border-color: rgba(0, 0, 0, 0.08) !important;
+  color: #4b5563 !important;
+}
+
+/* Recharts light overrides */
+html.light .recharts-default-tooltip {
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1) !important;
+}
+html.light .recharts-tooltip-label {
+  color: #4b5563 !important;
+}
+html.light .recharts-cartesian-grid-horizontal line,
+html.light .recharts-cartesian-grid-vertical line {
+  stroke: rgba(0, 0, 0, 0.05) !important;
+}
+
+/* ============================================================
+   WFX Explorer — Premium Brand Logo Custom Styling
+   ============================================================ */
+.brand-logo-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 40px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(8px);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.brand-logo-container::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: 12px;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.35), rgba(236, 72, 153, 0.35), rgba(245, 184, 0, 0.25));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  pointer-events: none;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.brand-logo-container:hover::before,
+.group:hover .brand-logo-container::before {
+  background: linear-gradient(135deg, #6366f1, #ec4899, #f5b800);
+}
+
+.brand-logo-glow {
+  position: absolute;
+  inset: -1px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #6366f1, #ec4899, #f5b800);
+  opacity: 0;
+  filter: blur(8px);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: -1;
+}
+
+.group:hover .brand-logo-glow {
+  opacity: 0.35;
+}
+
+.brand-logo-ambient {
+  position: absolute;
+  inset: 0;
+  border-radius: 11px;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(236, 72, 153, 0.08), rgba(245, 184, 0, 0.04));
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.group:hover .brand-logo-ambient {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(236, 72, 153, 0.15), rgba(245, 184, 0, 0.1));
+}
+
+/* Light mode overrides for brand logo styling */
+html.light .brand-logo-container {
+  background: rgba(0, 0, 0, 0.02) !important;
+  border-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+html.light .brand-logo-container::before {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(236, 72, 153, 0.2), rgba(245, 184, 0, 0.25)) !important;
+}
+
+html.light .brand-logo-glow {
+  background: linear-gradient(135deg, #6366f1, #ec4899, #f5b800) !important;
+}
+
+html.light .brand-logo-ambient {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.04), rgba(236, 72, 153, 0.04), rgba(245, 184, 0, 0.02)) !important;
+}
+
+html.light .brand-subtitle {
+  color: #4f46e5 !important; /* Indigo-600 */
+}
+
+

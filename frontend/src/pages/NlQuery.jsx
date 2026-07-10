@@ -44,11 +44,9 @@ export default function NlQuery() {
     scrollToBottom();
   }, [messages, loading]);
 
-  const handleQuery = async (e) => {
-    e.preventDefault();
-    if (!question.trim() || loading) return;
+  const executeQuery = async (qText) => {
+    if (!qText.trim() || loading) return;
 
-    const userQuestion = question.trim();
     setQuestion("");
     setLoading(true);
 
@@ -57,7 +55,7 @@ export default function NlQuery() {
 
     setMessages((prev) => [
       ...prev,
-      { id: userMsgId, role: "user", text: userQuestion },
+      { id: userMsgId, role: "user", text: qText },
       {
         id: assistantMsgId,
         role: "assistant",
@@ -81,7 +79,7 @@ export default function NlQuery() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ question: userQuestion }),
+        body: JSON.stringify({ question: qText }),
       });
 
       if (!response.ok) {
@@ -159,6 +157,12 @@ export default function NlQuery() {
     }
   };
 
+  const handleQuery = async (e) => {
+    e.preventDefault();
+    if (!question.trim() || loading) return;
+    await executeQuery(question.trim());
+  };
+
   const toggleSqlCollapse = (msgId) => {
     setMessages((prev) =>
       prev.map((msg) => {
@@ -217,9 +221,9 @@ export default function NlQuery() {
               </p>
             </div>
             <div className="flex flex-wrap items-center justify-center gap-2 pt-2">
-              <SuggestionChip>Buyers above 220 GSM</SuggestionChip>
-              <SuggestionChip>Top suppliers by revenue</SuggestionChip>
-              <SuggestionChip>Last quarter sales</SuggestionChip>
+              <SuggestionChip onClick={() => executeQuery("Buyers above 220 GSM")}>Buyers above 220 GSM</SuggestionChip>
+              <SuggestionChip onClick={() => executeQuery("Top suppliers by revenue")}>Top suppliers by revenue</SuggestionChip>
+              <SuggestionChip onClick={() => executeQuery("Last quarter sales")}>Last quarter sales</SuggestionChip>
             </div>
           </div>
         ) : (
@@ -429,11 +433,15 @@ export default function NlQuery() {
   );
 }
 
-function SuggestionChip({ children }) {
+function SuggestionChip({ children, onClick }) {
   return (
-    <span className="px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/8 text-[11px] font-medium text-stone-300 hover:border-amber-500/30 hover:text-amber-300 cursor-pointer transition-all">
+    <button
+      onClick={onClick}
+      type="button"
+      className="px-3.5 py-1.5 rounded-full bg-white/[0.04] border border-white/8 text-[11px] font-medium text-stone-300 hover:border-amber-500/30 hover:text-amber-300 cursor-pointer transition-all focus:outline-none focus:ring-1 focus:ring-amber-500/30"
+    >
       {children}
-    </span>
+    </button>
   );
 }
 

@@ -135,7 +135,7 @@ export default function Dashboard() {
       {/* Page header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-5">
         <div className="space-y-3">
-          <span className="text-eyebrow">Overview / 01</span>
+          <span className="text-eyebrow">Overview</span>
           <h2 className="text-4xl md:text-5xl font-display font-semibold text-stone-100 tracking-tight">
             Apparel production,{" "}
             <span className="italic text-amber-400">at a glance.</span>
@@ -162,12 +162,7 @@ export default function Dashboard() {
               key={idx}
               className="glass-panel glow-card rounded-2xl p-6 relative group flex flex-col justify-between min-h-[150px]"
             >
-              <div className="flex justify-between items-start">
-                <div>
-                  <span className="text-eyebrow-muted">
-                    {String(idx + 1).padStart(2, "0")}
-                  </span>
-                </div>
+              <div className="flex justify-end items-start">
                 <div className={`p-2.5 rounded-lg ${card.tint} border border-white/5`}>
                   <Icon className={`h-4 w-4 ${card.accent}`} strokeWidth={2.2} />
                 </div>
@@ -196,7 +191,7 @@ export default function Dashboard() {
         <div className="px-7 py-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b border-white/5">
           <div className="space-y-1.5">
             <div className="flex items-center gap-2">
-              <span className="text-eyebrow">Trend / 02</span>
+              <span className="text-eyebrow">Trend</span>
               <span className="chip-accent">
                 <span className="h-1.5 w-1.5 rounded-full bg-amber-400" />
                 Live
@@ -209,21 +204,22 @@ export default function Dashboard() {
               Total billings aggregated across the calendar year, broken down by month.
             </p>
           </div>
-          <button className="btn-outline-gold self-start md:self-center">
-            View Report
-            <ArrowUpRight className="h-3.5 w-3.5" />
-          </button>
         </div>
 
         <div className="p-7">
           <div className="h-80 w-full">
             {revenueData.length > 0 ? (
               <ResponsiveContainer width="100%" height="100%">
-                <AreaChart data={revenueData} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
+                <AreaChart data={revenueData} margin={{ top: 10, right: 10, left: 20, bottom: 10 }}>
                   <defs>
-                    <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="#f5b800" stopOpacity={0.4} />
-                      <stop offset="50%" stopColor="#f5b800" stopOpacity={0.15} />
+                    <linearGradient id="colorRevenueStroke" x1="0" y1="0" x2="1" y2="0">
+                      <stop offset="0%" stopColor="#6366f1" />
+                      <stop offset="50%" stopColor="#ec4899" />
+                      <stop offset="100%" stopColor="#f5b800" />
+                    </linearGradient>
+                    <linearGradient id="colorRevenueFill" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stopColor="#6366f1" stopOpacity={0.25} />
+                      <stop offset="50%" stopColor="#ec4899" stopOpacity={0.1} />
                       <stop offset="100%" stopColor="#f5b800" stopOpacity={0} />
                     </linearGradient>
                   </defs>
@@ -236,6 +232,12 @@ export default function Dashboard() {
                     axisLine={false}
                     dy={10}
                     fontWeight={500}
+                    tickFormatter={(val) => {
+                      if (!val) return "";
+                      const [year, month] = val.split("-");
+                      const date = new Date(parseInt(year, 10), parseInt(month, 10) - 1, 1);
+                      return date.toLocaleDateString("en-US", { month: "short", year: "2-digit" });
+                    }}
                   />
                   <YAxis
                     stroke="#57534e"
@@ -244,22 +246,23 @@ export default function Dashboard() {
                     axisLine={false}
                     tickFormatter={(val) => `$${val / 1000}k`}
                     fontWeight={500}
+                    width={65}
                   />
                   <Tooltip
-                    cursor={{ stroke: "#f5b800", strokeWidth: 1, strokeDasharray: "3 3" }}
+                    cursor={{ stroke: "#ec4899", strokeWidth: 1, strokeDasharray: "3 3" }}
                     content={<CustomTooltip />}
                   />
                   <Area
                     type="monotone"
                     dataKey="revenue"
-                    stroke="#f5b800"
-                    strokeWidth={2.5}
+                    stroke="url(#colorRevenueStroke)"
+                    strokeWidth={3}
                     fillOpacity={1}
-                    fill="url(#colorRevenue)"
+                    fill="url(#colorRevenueFill)"
                     activeDot={{
-                      r: 5,
-                      fill: "#f5b800",
-                      stroke: "#0a0e1a",
+                      r: 6,
+                      fill: "#ec4899",
+                      stroke: "#ffffff",
                       strokeWidth: 2,
                     }}
                   />
@@ -279,10 +282,18 @@ export default function Dashboard() {
 
 function CustomTooltip({ active, payload }) {
   if (active && payload && payload.length) {
+    const monthStr = payload[0].payload.month;
+    let formattedMonth = monthStr;
+    if (monthStr) {
+      const [year, month] = monthStr.split("-");
+      const date = new Date(parseInt(year, 10), parseInt(month, 10) - 1, 1);
+      formattedMonth = date.toLocaleDateString("en-US", { month: "long", year: "numeric" });
+    }
+    
     return (
       <div className="px-4 py-3 space-y-1">
         <span className="text-eyebrow-muted block">
-          {payload[0].payload.month}
+          {formattedMonth}
         </span>
         <div className="text-xl font-display font-semibold text-amber-400 text-numeral">
           {new Intl.NumberFormat("en-US", {

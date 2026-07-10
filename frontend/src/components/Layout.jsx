@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation, Outlet } from "react-router-dom";
 import {
   LayoutDashboard,
@@ -8,19 +8,42 @@ import {
   Menu,
   X,
   Compass,
-  Image
+  Image,
+  Sun,
+  Moon
 } from "lucide-react";
 
 export default function Layout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const location = useLocation();
 
+  const [theme, setTheme] = useState(() => {
+    const saved = localStorage.getItem("theme");
+    if (saved) return saved;
+    return "dark"; // Default is dark
+  });
+
+  useEffect(() => {
+    if (theme === "light") {
+      document.documentElement.classList.add("light");
+      document.documentElement.classList.remove("dark");
+    } else {
+      document.documentElement.classList.add("dark");
+      document.documentElement.classList.remove("light");
+    }
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+  };
+
   const navItems = [
-    { name: "Dashboard", path: "/", icon: LayoutDashboard, index: "01" },
-    { name: "NL Query", path: "/nl-query", icon: MessageSquareCode, index: "02" },
-    { name: "Product Search", path: "/search", icon: Search, index: "03" },
-    { name: "Finished Goods", path: "/finished-goods", icon: Layers, index: "04" },
-    { name: "Image Search", path: "/image-search", icon: Image, index: "05" },
+    { name: "Dashboard", path: "/", icon: LayoutDashboard, accentClass: "active-blue" },
+    { name: "NL Query", path: "/nl-query", icon: MessageSquareCode, accentClass: "active-blue" },
+    { name: "Product Search", path: "/search", icon: Search, accentClass: "active-blue" },
+    { name: "Image Search", path: "/image-search", icon: Image, accentClass: "active-blue" },
+    { name: "Finished Goods", path: "/finished-goods", icon: Layers, accentClass: "active-blue" },
   ];
 
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
@@ -39,21 +62,27 @@ export default function Layout() {
 
       {/* Sidebar */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 flex flex-col w-72 bg-[#0a0e1a]/95 backdrop-blur-xl border-r border-white/5 transform transition-transform duration-300 ease-in-out md:translate-x-0 md:static ${
+        className={`fixed inset-y-0 left-0 z-50 flex flex-col w-60 bg-[#0a0e1a]/95 backdrop-blur-xl border-r border-white/5 transform transition-transform duration-300 ease-in-out md:translate-x-0 md:static ${
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
         {/* Brand */}
         <div className="h-20 flex items-center justify-between px-6 border-b border-white/5">
           <Link to="/" className="flex items-center gap-3 group">
-            <div className="relative p-2 rounded-lg bg-gradient-to-br from-amber-400 to-amber-600 shadow-lg shadow-amber-500/20">
-              <Compass className="h-4 w-4 text-stone-950" strokeWidth={2.5} />
+            <div className="brand-logo-container">
+              {/* Glow backplate on hover */}
+              <div className="brand-logo-glow" />
+              {/* Soft ambient background */}
+              <div className="brand-logo-ambient" />
+              {/* The compass icon */}
+              <Compass className="h-4.5 w-4.5 text-stone-200 group-hover:text-white group-hover:rotate-[360deg] transition-transform duration-[1200ms] ease-out z-10" strokeWidth={1.8} />
             </div>
             <div className="flex flex-col leading-none">
-              <span className="text-[10px] font-bold tracking-[0.25em] text-amber-400 uppercase">
+              <span className="text-xl font-extrabold tracking-tight text-stone-100 flex items-center gap-1.5">
                 WFX
+                <span className="h-1.5 w-1.5 rounded-full bg-gradient-to-r from-indigo-500 via-pink-500 to-amber-500 animate-pulse" />
               </span>
-              <span className="text-base font-display font-semibold text-stone-100 tracking-tight mt-0.5">
+              <span className="text-[10px] font-bold tracking-[0.25em] text-indigo-400 brand-subtitle uppercase mt-0.5">
                 Explorer
               </span>
             </div>
@@ -84,31 +113,22 @@ export default function Layout() {
                 onClick={() => setSidebarOpen(false)}
                 className={`relative flex items-center gap-4 px-4 py-3 rounded-xl font-medium text-sm transition-all duration-300 group overflow-hidden ${
                   isActive
-                    ? "bg-amber-500/[0.06] text-amber-300"
+                    ? `nav-item-active ${item.accentClass}`
                     : "text-stone-400 hover:text-stone-100 hover:bg-white/[0.03]"
                 }`}
               >
-                {/* Gold left bar for active item */}
+                {/* Active left indicator bar */}
                 {isActive && (
-                  <span className="absolute left-0 top-1/2 -translate-y-1/2 h-7 w-[3px] bg-amber-400 rounded-r-full shadow-[0_0_12px_rgba(245,184,0,0.6)]" />
+                  <span className="absolute left-0 top-1/2 -translate-y-1/2 h-7 w-[3px] nav-left-indicator rounded-r-full" />
                 )}
 
                 <Icon
-                  className={`h-[18px] w-[18px] shrink-0 transition-all duration-300 ${
-                    isActive
-                      ? "text-amber-400"
-                      : "text-stone-500 group-hover:text-stone-300"
+                  className={`h-[18px] w-[18px] shrink-0 transition-all duration-300 nav-icon ${
+                    isActive ? "" : "text-stone-500 group-hover:text-stone-300"
                   }`}
                   strokeWidth={isActive ? 2.4 : 2}
                 />
                 <span className="flex-1 tracking-wide">{item.name}</span>
-                <span
-                  className={`text-[10px] font-mono font-semibold tracking-wider ${
-                    isActive ? "text-amber-400/70" : "text-stone-600"
-                  }`}
-                >
-                  {item.index}
-                </span>
               </Link>
             );
           })}
@@ -160,9 +180,13 @@ export default function Layout() {
                 Real-time
               </span>
             </div>
-            <div className="h-9 w-9 rounded-full bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-stone-950 font-display font-semibold text-sm shadow-lg shadow-amber-500/20">
-              A
-            </div>
+            <button
+              onClick={toggleTheme}
+              className="h-9 w-9 rounded-full bg-white/[0.03] border border-white/5 flex items-center justify-center text-stone-400 hover:text-stone-100 hover:bg-white/[0.08] transition-all cursor-pointer shadow-lg hover:shadow-white/5"
+              aria-label="Toggle theme"
+            >
+              {theme === "light" ? <Moon className="h-4.5 w-4.5 text-stone-400" /> : <Sun className="h-4.5 w-4.5 text-amber-400" />}
+            </button>
           </div>
         </header>
 
